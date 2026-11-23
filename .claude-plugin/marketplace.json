@@ -1,0 +1,99 @@
+{
+  "name": "claude-setup",
+  "owner": {
+    "name": "vihu"
+  },
+  "description": "A shareable Claude Code setup: skills, hooks, rules, and the third-party plugins it builds on",
+  "plugins": [
+    {
+      "name": "everything",
+      "source": "./plugins/everything",
+      "description": "Installs the whole setup in one step"
+    },
+    {
+      "name": "core",
+      "source": "./plugins/core",
+      "description": "Skills, the 80/20 and /away hooks, and the obscura browser MCP server"
+    },
+    {
+      "name": "rules",
+      "source": "./plugins/rules",
+      "description": "Working rules (tool routing, artifacts, git policy, formatting) injected at session start"
+    },
+    {
+      "name": "context-meter",
+      "source": "./plugins/context-meter",
+      "description": "Shows context usage against the autocompact threshold above the prompt"
+    },
+    {
+      "name": "ponytail",
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    {
+      "name": "i-have-adhd",
+      "source": {
+        "source": "github",
+        "repo": "ayghri/i-have-adhd"
+      }
+    },
+    {
+      "name": "diagram-design",
+      "source": {
+        "source": "github",
+        "repo": "cathrynlavery/diagram-design"
+      }
+    },
+    {
+      "name": "impeccable",
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
+    },
+    {
+      "name": "mattpocock-skills",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/mattpocock/skills.git"
+      }
+    },
+    {
+      "name": "archify",
+      "source": {
+        "source": "github",
+        "repo": "tt-a1i/archify"
+      },
+      "strict": false,
+      "skills": [
+        "./archify"
+      ]
+    },
+    {
+      "name": "livemark",
+      "source": {
+        "source": "github",
+        "repo": "vihu/livemark"
+      },
+      "description": "Find, write and edit notes in a livemark vault"
+    },
+    {
+      "name": "pagebin",
+      "source": {
+        "source": "github",
+        "repo": "vihu/pagebin"
+      },
+      "description": "Publish HTML pages to a Pagebin server"
+    },
+    {
+      "name": "roughdraft",
+      "source": {
+        "source": "github",
+        "repo": "vihu/roughdraft"
+      },
+      "description": "Hand-drawn Excalidraw diagrams from a JSON skeleton"
+    }
+  ]
+}

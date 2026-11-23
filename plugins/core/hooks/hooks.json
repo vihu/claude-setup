@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      { "hooks": [{ "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/eighty-twenty.sh\"", "timeout": 5 }] }
+    ],
+    "SessionStart": [
+      { "matcher": "compact", "hooks": [{ "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/away-compact.sh\"", "timeout": 10 }] }
+    ]
+  }
+}

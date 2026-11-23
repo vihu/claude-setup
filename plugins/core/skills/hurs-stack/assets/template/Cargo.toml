@@ -1,0 +1,36 @@
+[package]
+name = "hurs-app"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.94"
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+name = "hurs-app"
+path = "src/main.rs"
+
+[dependencies]
+axum = "0.8"
+tokio = { version = "1", features = ["full"] }
+tower-http = { version = "0.7", features = ["trace", "compression-gzip", "timeout"] }
+maud = { version = "0.27", features = ["axum"] }
+sqlx = { version = "0.9", features = ["runtime-tokio", "sqlite", "migrate", "macros"] }
+serde = { version = "1", features = ["derive"] }
+color-eyre = "0.6"
+thiserror = "2"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+rust-embed = "8"
+mime_guess = "2"
+
+[dev-dependencies]
+chromiumoxide = { version = "0.9", default-features = false }
+futures = "0.3"
+tempfile = "3"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true

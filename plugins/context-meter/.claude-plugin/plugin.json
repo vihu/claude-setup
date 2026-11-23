@@ -1,0 +1,1 @@
+{ "name": "context-meter", "version": "0.2.0", "description": "Shows context usage against the autocompact threshold in a blue band above the prompt", "types": "./types/index.d.ts" }

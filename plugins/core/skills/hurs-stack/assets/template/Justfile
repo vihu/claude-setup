@@ -1,0 +1,70 @@
+# HURS app tasks. `just` with no args lists them.
+
+set shell := ["bash", "-euo", "pipefail", "-c"]
+
+htmx_version := "4.0.0"
+db_url := env_var_or_default("DATABASE_URL", "sqlite://data/app.db")
+
+default:
+    @just --list
+
+# Download tailwind binary, daisyUI bundles, htmx, Alpine; create the dev db and .sqlx/ so query macros compile. Run once per checkout.
+setup:
+    mkdir -p tools assets/dist/js data
+    os="$(uname -s | tr '[:upper:]' '[:lower:]')"; arch="$(uname -m)"; \
+    case "$arch" in x86_64) arch=x64;; aarch64|arm64) arch=arm64;; esac; \
+    curl -sLo tools/tailwindcss "https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-${os/darwin/macos}-${arch}"; \
+    chmod +x tools/tailwindcss
+    curl -sLo tools/daisyui.mjs https://github.com/saadeghi/daisyui/releases/latest/download/daisyui.mjs
+    curl -sLo tools/daisyui-theme.mjs https://github.com/saadeghi/daisyui/releases/latest/download/daisyui-theme.mjs
+    curl -sLo assets/dist/js/htmx.min.js "https://cdn.jsdelivr.net/npm/htmx.org@{{htmx_version}}/dist/htmx.min.js"
+    curl -sLo assets/dist/js/hx-alpine-compat.js "https://cdn.jsdelivr.net/npm/htmx.org@{{htmx_version}}/dist/ext/hx-alpine-compat.js"
+    curl -sLo assets/dist/js/hx-live.js "https://cdn.jsdelivr.net/npm/htmx.org@{{htmx_version}}/dist/ext/hx-live.js"
+    curl -sLo assets/dist/js/alpine.min.js "https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"
+    just css
+    just migrate
+    just prepare
+    @echo "setup done. next: just dev"
+
+# Build CSS once.
+css:
+    tools/tailwindcss -i assets/input.css -o assets/dist/app.css --minify
+
+# Rebuild CSS on change. `=always` keeps it alive as a background job, where stdin is /dev/null.
+css-watch:
+    tools/tailwindcss -i assets/input.css -o assets/dist/app.css --watch=always
+
+# Run server with auto-reload (watchexec), plus the CSS watcher.
+dev:
+    DATABASE_URL={{db_url}} RUST_LOG=${RUST_LOG:-info,tower_http=debug} \
+    bash -c 'trap "kill 0" EXIT; just css-watch & watchexec -r -w src -w migrations -w Cargo.toml -- cargo run'
+
+run:
+    DATABASE_URL={{db_url}} cargo run
+
+# Format, lint, test. Run before declaring work done.
+check:
+    cargo fmt --all -- --check
+    cargo clippy --all-targets -- -D warnings
+    if command -v cargo-nextest >/dev/null; then cargo nextest run --no-tests=pass; else cargo test; fi
+
+fmt:
+    cargo fmt --all
+
+# Browser tests need Chrome or Chromium on PATH. Serial: parallel launches collide on the shared profile dir.
+# Depends on css so screenshots never show a stale stylesheet.
+test-browser: css
+    cargo test --test browser -- --ignored --nocapture --test-threads=1
+
+# Regenerate .sqlx/ for offline query checking. Needs sqlx-cli with the sqlite feature.
+prepare:
+    DATABASE_URL={{db_url}} cargo sqlx prepare
+
+# Create the dev db if missing and apply migrations, without starting the server.
+migrate:
+    DATABASE_URL={{db_url}} cargo sqlx database setup
+
+# Static Linux binary with embedded assets.
+release: css
+    cargo build --release --target x86_64-unknown-linux-musl
+    @ls -lh target/x86_64-unknown-linux-musl/release/hurs-app

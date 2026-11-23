@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+/* Scan Rust sources for class names; skip the toolchain files. */
+@source "../src";
+@source not "../tools";
+
+@plugin "../tools/daisyui.mjs";
+
+/* Optional: custom theme. See https://daisyui.com/docs/themes/
+@plugin "../tools/daisyui-theme.mjs" {
+  name: "app";
+  default: true;
+  color-scheme: light;
+  --color-primary: oklch(55% 0.2 260);
+}
+*/
+
+/* Alpine: hide until initialized. */
+[x-cloak] { display: none !important; }
+
+/* htmx indicators: fade in after a short delay so fast requests never flash a spinner. */
+.htmx-indicator { opacity: 0; transition: opacity 150ms ease-in; }
+.htmx-request .htmx-indicator,
+.htmx-request.htmx-indicator { opacity: 1; transition: opacity 200ms ease-in 200ms; }

@@ -1,0 +1,5 @@
+{
+  "name": "core",
+  "description": "Skills, the 80/20 and /away hooks, and the obscura browser MCP server",
+  "mcpServers": { "obscura": { "command": "obscura", "args": ["mcp"] } }
+}

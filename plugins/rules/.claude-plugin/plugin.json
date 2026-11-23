@@ -1,0 +1,1 @@
+{ "name": "rules", "description": "Working rules (tool routing, artifacts, git policy, formatting) injected at session start" }

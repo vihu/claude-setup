@@ -1,0 +1,18 @@
+{
+  "name": "everything",
+  "description": "Installs the whole setup in one step",
+  "dependencies": [
+    "core",
+    "rules",
+    "context-meter",
+    "ponytail",
+    "i-have-adhd",
+    "diagram-design",
+    "impeccable",
+    "mattpocock-skills",
+    "archify",
+    "livemark",
+    "pagebin",
+    "roughdraft"
+  ]
+}
