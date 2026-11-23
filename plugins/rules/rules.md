@@ -58,7 +58,7 @@ Types:
 
 # Code conventions this file adds
 
-- **Never** write `ponytail` comments: no `ponytail:` markers, and no comment that mentions ponytail. This overrides the `ponytail` plugin's instruction to mark simplifications in code.
+- **Never** write `ponytail` marker comments: no `shortcut:` or `ponytail:` markers, and no comment that mentions ponytail. This overrides the `ponytail` plugin's instruction to mark simplifications in code.
 - Keep files under roughly 500 lines. Split along logical boundaries.
 - Match the existing style of the file you edit. **Never** reformat unrelated code.
 - **Always** run the project formatter and linter before declaring a task done. If none is configured, say so.
