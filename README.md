@@ -16,6 +16,8 @@ To pick and choose instead, skip step 2 and install single plugins, such as `/pl
 
 Run `/plugin marketplace update claude-setup`. No plugin here pins a `version`, so every push to `main` counts as an update.
 
+To update automatically instead, run `/plugin`, open the Marketplaces tab, select `claude-setup`, and turn auto-update on. It is off by default for third-party marketplaces.
+
 ## Plugins
 
 | Plugin                                                                                    | What it adds                                                                                                                                                                            |
