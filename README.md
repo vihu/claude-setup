@@ -7,8 +7,9 @@ A Claude Code plugin marketplace that installs my whole setup: skills, hooks, wo
 1. In Claude Code, run `/plugin marketplace add vihu/claude-setup`
 2. Run `/plugin install everything@claude-setup`. This pulls in every plugin listed below.
 3. Turn on always-on ADHD mode: `touch ~/.claude/.i-have-adhd-always`
-4. Merge `settings.example.json` into `~/.claude/settings.json` by hand. Plugins cannot set permissions or the output style.
-5. Gitignore the AI docs folder globally: `echo '.ai-docs/' >> ~/.config/git/ignore`
+4. Optional: load the rules as your global `CLAUDE.md` instead of through the `rules` plugin. Run `ln -s ~/.claude/plugins/marketplaces/claude-setup/plugins/rules/rules.md ~/.claude/CLAUDE.md`, then `/plugin disable rules@claude-setup` so the rules do not load twice. No plugin can create this link for you.
+5. Merge `settings.example.json` into `~/.claude/settings.json` by hand. Plugins cannot set any of these settings.
+6. Gitignore the AI docs folder globally: `echo '.ai-docs/' >> ~/.config/git/ignore`
 
 To pick and choose instead, skip step 2 and install single plugins, such as `/plugin install core@claude-setup`.
 

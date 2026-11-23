@@ -9,5 +9,10 @@
       "Bash(gh issue comment:*)"
     ]
   },
-  "outputStyle": "Concise"
+  "outputStyle": "Concise",
+  "tui": "fullscreen",
+  "theme": "auto",
+  "idleCompaction": false,
+  "remoteControlAtStartup": true,
+  "agentPushNotifEnabled": true
 }
