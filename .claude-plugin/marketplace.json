@@ -49,8 +49,9 @@
     {
       "name": "impeccable",
       "source": {
-        "source": "github",
-        "repo": "pbakaus/impeccable"
+        "source": "git-subdir",
+        "url": "pbakaus/impeccable",
+        "path": "plugin"
       }
     },
     {
@@ -77,6 +78,10 @@
         "source": "github",
         "repo": "vihu/livemark"
       },
+      "strict": false,
+      "skills": [
+        "./skills/livemark-notes"
+      ],
       "description": "Find, write and edit notes in a livemark vault"
     },
     {
@@ -85,6 +90,10 @@
         "source": "github",
         "repo": "vihu/pagebin"
       },
+      "strict": false,
+      "skills": [
+        "./skills/pagebin"
+      ],
       "description": "Publish HTML pages to a Pagebin server"
     },
     {
@@ -93,6 +102,10 @@
         "source": "github",
         "repo": "vihu/roughdraft"
       },
+      "strict": false,
+      "skills": [
+        "./skills/roughdraft"
+      ],
       "description": "Hand-drawn Excalidraw diagrams from a JSON skeleton"
     }
   ]
