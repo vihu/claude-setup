@@ -13,7 +13,7 @@
     {
       "name": "core",
       "source": "./plugins/core",
-      "description": "Skills, the 80/20 and /away hooks, and the obscura browser MCP server"
+      "description": "Skills, the 80/20 and /away hooks, and the obscura browser and silverbullet notes MCP servers"
     },
     {
       "name": "rules",

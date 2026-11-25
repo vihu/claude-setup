@@ -41,7 +41,9 @@ Routing rule:
 # Artifacts
 
 - Actionable AI-generated artifacts live in project-local `.ai-docs/`.
-- Durable notes meant to outlive the work go to livemark (`livemark:livemark-notes` skill), when that skill is installed.
+- Durable notes go to SilverBullet (`silverbullet` MCP, space `Notes`). Load its `Writing Notes` skill via `help` before creating one.
+- `.ai-docs/` artifacts stay in `.ai-docs/`. Copy one into SilverBullet only when I ask.
+- Use livemark (`livemark:livemark-notes` skill) only when I name it.
 - `.ai-docs/` is globally gitignored.
 - Filename: `<TYPE>-<NNN>-<kebab-slug>.md`.
 - `NNN` is monotonic per type, zero-padded to 3 digits.

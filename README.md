@@ -21,28 +21,29 @@ To update automatically instead, run `/plugin`, open the Marketplaces tab, selec
 
 ## Plugins
 
-| Plugin                                                                                    | What it adds                                                                                                                                                                            |
-| ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `everything`                                                                              | Nothing itself. Depends on all the plugins below.                                                                                                                                       |
-| `core`                                                                                    | 14 skills (`rust`, `erlang`, `pr-review`, `pr-scoper`, `plan-draft`, `handoff`, `away`, ...), the 80/20 footer hook, the `/away` compaction hook, and the `obscura` browser MCP server. |
-| `rules`                                                                                   | My `CLAUDE.md` working rules, injected at every session start. Skip it if you have your own `CLAUDE.md`.                                                                                |
-| `context-meter`                                                                           | Context usage against the autocompact threshold, shown above the prompt. `/ctx` shows usage by category.                                                                                |
-| `livemark`, `pagebin`, `roughdraft`                                                       | My tools' own skills, installed straight from each tool's repo.                                                                                                                         |
-| `ponytail`, `i-have-adhd`, `diagram-design`, `impeccable`, `mattpocock-skills`, `archify` | Third-party plugins, listed here so dependencies resolve from one marketplace. Each keeps its own license and upstream repo.                                                            |
+| Plugin                                                                                    | What it adds                                                                                                                                                                                                                 |
+| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `everything`                                                                              | Nothing itself. Depends on all the plugins below.                                                                                                                                                                            |
+| `core`                                                                                    | 14 skills (`rust`, `erlang`, `pr-review`, `pr-scoper`, `plan-draft`, `handoff`, `away`, ...), the 80/20 footer hook, the `/away` compaction hook, the `obscura` browser MCP server, and the `silverbullet` notes MCP server. |
+| `rules`                                                                                   | My `CLAUDE.md` working rules, injected at every session start. Skip it if you have your own `CLAUDE.md`.                                                                                                                     |
+| `context-meter`                                                                           | Context usage against the autocompact threshold, shown above the prompt. `/ctx` shows usage by category.                                                                                                                     |
+| `livemark`, `pagebin`, `roughdraft`                                                       | My tools' own skills, installed straight from each tool's repo.                                                                                                                                                              |
+| `ponytail`, `i-have-adhd`, `diagram-design`, `impeccable`, `mattpocock-skills`, `archify` | Third-party plugins, listed here so dependencies resolve from one marketplace. Each keeps its own license and upstream repo.                                                                                                 |
 
 Skills from a plugin are namespaced: `/core:pr-review`, not `/pr-review`.
 
 ## Requirements
 
-| Tool                                                                                       | Needed by                                           |
-| ------------------------------------------------------------------------------------------ | --------------------------------------------------- |
-| [`obscura`](https://github.com/h4ckf0r0day/obscura/releases) on `PATH`                     | `core` MCP server and the `rules` web-reading rules |
-| [`gh`](https://cli.github.com), logged in                                                  | `pr-*` skills                                       |
-| [`roughdraft`](https://github.com/vihu/roughdraft)                                         | `roughdraft` plugin                                 |
-| [`livemark`](https://github.com/vihu/livemark)                                             | `livemark` plugin                                   |
-| A [Pagebin](https://github.com/vihu/pagebin) server, `PAGEBIN_URL` and `PAGEBIN_API_TOKEN` | `pagebin` plugin                                    |
-| [`uv`](https://docs.astral.sh/uv/) and a `TYPESAFE_API_KEY`                                | `recall` skill                                      |
-| `node`                                                                                     | `i-have-adhd` hooks, `impeccable`, `archify`        |
+| Tool                                                                                                                                            | Needed by                                           |
+| ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| [`obscura`](https://github.com/h4ckf0r0day/obscura/releases) on `PATH`                                                                          | `core` MCP server and the `rules` web-reading rules |
+| A [SilverBullet](https://silverbullet.md) server at `notes.vihu.dev`, and [`sb`](https://docs.silverbullet.md/Integrations/CLI) signed in to it | `core` MCP server and the `rules` note-taking rules |
+| [`gh`](https://cli.github.com), logged in                                                                                                       | `pr-*` skills                                       |
+| [`roughdraft`](https://github.com/vihu/roughdraft)                                                                                              | `roughdraft` plugin                                 |
+| [`livemark`](https://github.com/vihu/livemark)                                                                                                  | `livemark` plugin                                   |
+| A [Pagebin](https://github.com/vihu/pagebin) server, `PAGEBIN_URL` and `PAGEBIN_API_TOKEN`                                                      | `pagebin` plugin                                    |
+| [`uv`](https://docs.astral.sh/uv/) and a `TYPESAFE_API_KEY`                                                                                     | `recall` skill                                      |
+| `node`                                                                                                                                          | `i-have-adhd` hooks, `impeccable`, `archify`        |
 
 ## Developing
 
