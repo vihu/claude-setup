@@ -40,14 +40,12 @@ Routing rule:
 
 # Artifacts
 
-- Actionable AI-generated artifacts live in project-local `.ai-docs/`.
-- Durable notes go to SilverBullet (`silverbullet` MCP, space `Notes`). Load its `Writing Notes` skill via `help` before creating one.
-- `.ai-docs/` artifacts stay in `.ai-docs/`. Copy one into SilverBullet only when I ask.
+- Planning docs go to SilverBullet, space `Hermes` (`silverbullet` MCP). Load its `Writing Hermes Docs` skill via `help` before writing one. **Never** write them into a repository, `.ai-docs/`, or local files.
+- Page name: `<project>/<TYPE>-<NNN>-<slug>`, where `project` is the repository or folder name in lowercase.
+- `NNN` is monotonic per type within a project, zero-padded to 3 digits.
+- Examples: `livemark/PLAN-008-sync-engine`, `pagebin/TASK-020-batch-export`, `mearum-iced/REVIEW-004-branch-fix-17`.
+- Durable personal notes go to SilverBullet, space `Notes`. Load its `Writing Notes` skill via `help` before creating one.
 - Use livemark (`livemark:livemark-notes` skill) only when I name it.
-- `.ai-docs/` is globally gitignored.
-- Filename: `<TYPE>-<NNN>-<kebab-slug>.md`.
-- `NNN` is monotonic per type, zero-padded to 3 digits.
-- Examples: `IDEA-001-usage-billing.md`, `PLAN-002-auth-rewrite.md`, `TASK-003-add-csv-import.md`, `REVIEW-001-branch-fix-17.md`.
 - Excalidraw diagrams: deliver the `.excalidraw` file only. **Never** save a rendered PNG or other image; render screenshots are for review only.
 
 Types:
@@ -55,8 +53,11 @@ Types:
 - `IDEA`: exploratory and unscoped. May never be implemented. Captures motivation and rough shape.
 - `PLAN`: agreed direction. Contains goals, non-goals, architecture, milestones, open questions. Promote an `IDEA` to a `PLAN` when it is worth pursuing.
 - `TASK`: actionable, scoped unit of work with acceptance criteria. Derived from a `PLAN`, or standalone for small work.
+- `ISSUE`: a bug or problem found while working, with how to reproduce it.
 - `REVIEW`: findings for a branch. Line-scoped, shown in a table, each rated `HIGH`, `MED`, or `LOW`. Typically against `main` or `master`.
 - `HANDOFF`: resume prompt for a fresh session after `/clear`. Read once, then stale.
+- `RESEARCH`: a research report, conclusion first, with sources.
+- `REFERENCE`: background material other docs link to.
 
 # Code conventions this file adds
 
@@ -79,7 +80,7 @@ These sit on top of the `i-have-adhd` ruleset.
 - If a question is needed: ask exactly one, as the ❓ Decide line of the `## 80/20` footer.
 - Pick one name per concept. Keep it for the whole session.
 - Skill output formats set what goes in a reply, not how it is laid out. Render every skill's report in the `i-have-adhd` shape. This removes `i-have-adhd`'s "the task wins" exception for layout.
-- **Never** put a table in a terminal reply when any cell holds a sentence. Use a numbered list. Tables in `.ai-docs/` files are fine.
+- **Never** put a table in a terminal reply when any cell holds a sentence. Use a numbered list. Tables in planning docs are fine.
 - The skim is the `## 80/20` footer from the `eighty-twenty` hook. It goes last. No top skim. Findings, verdicts, evidence, and reasoning come before it as short prose. This overrides `i-have-adhd` on leading with the action and on closing recaps.
 - Each skim line holds one idea in at most 15 words. No semicolons.
 - Finished and no-op items share the ✅ Result line.
