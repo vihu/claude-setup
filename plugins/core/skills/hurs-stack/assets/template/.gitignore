@@ -4,4 +4,3 @@
 /assets/dist/*
 !/assets/dist/.gitkeep
 .env
-.ai-docs/

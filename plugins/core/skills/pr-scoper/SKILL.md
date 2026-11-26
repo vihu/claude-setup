@@ -1,11 +1,11 @@
 ---
 name: pr-scoper
-description: Check a GitHub PR for scope creep and YAGNI, KISS, and DRY violations, each pinned to a file and line, and write the findings to `.ai-docs/`. Complements `/core:pr-review`. Read-only, never posts to GitHub.
+description: Check a GitHub PR for scope creep and YAGNI, KISS, and DRY violations, each pinned to a file and line, and write the findings to the SilverBullet `Hermes` space. Complements `/core:pr-review`. Read-only, never posts to GitHub.
 disable-model-invocation: true
 argument-hint: "[pr-number-or-url] [repo-dir]"
 ---
 
-Scope-check a PR and write the review to `.ai-docs/`. Arguments: `$ARGUMENTS`.
+Scope-check a PR and write the review to the SilverBullet `Hermes` space. Arguments: `$ARGUMENTS`.
 
 Resolve the target first. The working directory may be a different repo, so every command names the target:
 
@@ -38,16 +38,17 @@ This review owns scope and simplicity: creep, YAGNI, KISS, DRY. Correctness, sec
    - `split`: any `HIGH` creep, or creep over a quarter of the changed lines.
    - `trim`: any other `HIGH` or `MED` finding.
    - `lean`: the rest.
-9. Write `.ai-docs/REVIEW-NNN-<repo>-<n>-scope.md` under the local checkout, else under the working directory (create `.ai-docs/` if missing), `NNN` one above the highest existing `REVIEW-*` there. Body, in order:
-   - Heading: `# Scope review <repo>#<n> <short PR subject>`.
+9. Write the review with the `silverbullet` MCP, `space: "Hermes"`, as page `<repo>/REVIEW-<NNN>-pr-<n>-scope` with `status: open`, where `<repo>` is the name half of `<R>` in lowercase. Read `Library/Writing Hermes Docs` in that space first and follow it for `NNN` and frontmatter (`repo: <R>`). Body, in order:
+   - Heading: `# Scope review <repo> PR <n> <short PR subject>`.
    - Line 1: verdict and one sentence why.
    - Line 2: the scope sentence.
    - Line 3: PR URL, `<head>` into `<base>`, short head SHA, `+<additions> -<deletions>`, creep line count, and `net: -<N> lines possible` (lines the fixes would remove). If there is no local checkout, or its `HEAD` differs from the head SHA, say the review covers the pushed head only.
    - A table `| Sev | Kind | Location | Comment |`, sorted `HIGH`, `MED`, `LOW`. Kind: `creep`, `yagni`, `kiss`, or `dry`. Location: `` `path:line` `` or `` `path:start-end` ``, new-side lines at the head SHA. Comment: one or two sentences, the problem then the fix, ready to paste as a review comment. Escape `|` inside cells.
    - `## Split plan`, for verdict `split` only: one line per follow-up PR, a conventional-commit title and the hunks it takes.
    - `## Not reviewed`: skipped files (generated, lockfiles, vendored) and why. Omit when empty.
+   Then run `space.lint("<page>")` with `lua`. Fix the page until it returns an empty list.
 10. Reply:
-    - Line 1: the review's absolute path and the verdict.
+    - Line 1: the review's page name and the verdict.
     - Line 2: finding count per kind, and `net: -<N> lines possible`.
     - Each `HIGH` finding, at most 5: `path:line` and its comment.
     - `Next:` open the review.

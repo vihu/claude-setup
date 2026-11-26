@@ -1,13 +1,13 @@
 ---
 name: handoff
-description: Write a self-contained resume prompt for this session to .ai-docs/, so a fresh session can continue after /clear. Writes only the handoff file, never continues the task.
+description: Write a self-contained resume prompt for this session to the SilverBullet Hermes space, so a fresh session can continue after /clear. Writes only the handoff page, never continues the task.
 disable-model-invocation: true
 argument-hint: "[next-focus]"
 ---
 
 Write a handoff prompt for this session. Focus for the next session: `$ARGUMENTS` (empty: infer it from where the work stopped).
 
-Stop after the handoff. Never continue the task, edit any other file, or run state-changing git commands.
+Stop after the handoff. Never continue the task, edit any file or other page, or run state-changing git commands.
 
 1. Check the real state instead of recalling it: `git status --short`, `git diff --stat`, `git log --oneline -10`, the branch and its upstream. Re-read any file whose current content the handoff depends on.
 2. Write the prompt to the next agent, in second person and self-contained: no "as discussed", no "above". Body, in order:
@@ -19,8 +19,8 @@ Stop after the handoff. Never continue the task, edit any other file, or run sta
    - `## Open questions`: for me to answer, not for the agent to guess. Omit when empty.
    - `## Next`: numbered steps, at most 5, the first one doable without asking anything.
    Prefer pointers over copies: cite `path:line` instead of pasting code the next session can read. Spend words on what it cannot re-derive: decisions, reasons, dead ends.
-3. Write it to `.ai-docs/HANDOFF-NNN-<kebab-slug>.md` (create `.ai-docs/` if missing), `NNN` one above the highest existing `HANDOFF-*`. If an earlier handoff covers the same work, link it on the last line.
+3. Write it with the `silverbullet` MCP, `space: "Hermes"`, as page `<project>/HANDOFF-<NNN>-<slug>` with `status: open`. Read `Library/Writing Hermes Docs` in that space first and follow it for the project name, `NNN` and frontmatter. If an earlier handoff covers the same work, wiki-link it on the last line. Then run `space.lint("<page>")` with `lua`. Fix the page until it returns an empty list.
 4. Reply:
-   - Line 1: the handoff's absolute path.
+   - Line 1: the handoff's page name.
    - Line 2: the goal and the first `## Next` step.
-   - `Next:` run `/clear`, then paste: `Read <absolute path> and continue from its Next section.`
+   - `Next:` run `/clear`, then paste: `Read the SilverBullet page <page> in space Hermes and continue from its Next section.`

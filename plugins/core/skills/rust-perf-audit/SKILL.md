@@ -1,6 +1,6 @@
 ---
 name: rust-perf-audit
-description: Audit a Rust repo for performance wins and write ranked findings, each pinned to a file and line, to `.ai-docs/`. Read-only unless you ask it to apply fixes.
+description: Audit a Rust repo for performance wins and write ranked findings, each pinned to a file and line, to the SilverBullet `Hermes` space. Read-only unless you ask it to apply fixes.
 disable-model-invocation: true
 argument-hint: "[crate-dir] [hot-path-or-workload]"
 ---
@@ -32,15 +32,16 @@ Every finding carries its evidence: `measured` (a profile share or bench number)
    - `HIGH`: an algorithmic win (O(n²) to O(n), O(n) to O(1) per operation) on unbounded input, or a fix on a frame holding at least 10% of measured time.
    - `MED`: per-item allocation, repeated hashing, or serial independent work in a hot loop. Release profile gaps.
    - `LOW`: cold paths, small n, and crate swaps without a measured bottleneck.
-7. Write `.ai-docs/REVIEW-NNN-perf-<crate>.md` under `<D>` (create `.ai-docs/` if missing), `NNN` one above the highest existing `REVIEW-*` there. Body, in order:
+7. Write the review with the `silverbullet` MCP, `space: "Hermes"`, as page `<project>/REVIEW-<NNN>-perf-<crate>` with `status: open`, where `<project>` is the lowercase name of `<D>`'s repository, or the crate name outside one. Read `Library/Writing Hermes Docs` in that space first and follow it for `NNN` and frontmatter. Body, in order:
    - Heading: `# Perf audit <crate>`.
    - Line 1: `measured` or `static`, and the hot paths audited.
    - `## Baseline`: each command, its numbers, and the core count. Omit when static.
    - A table `| # | Sev | Location | Pattern | Fix | Evidence |`, sorted `HIGH`, `MED`, `LOW`. Location: `` `path:line` `` or `` `path:start-end` ``. Pattern: its number and name. Fix: one or two sentences, including what the check confirmed. Escape `|` inside cells.
    - `## Clean`: the patterns checked with no finding, on one line.
    - `## Not audited`: crates or paths skipped and why. Omit when empty.
+   Then run `space.lint("<page>")` with `lua`. Fix the page until it returns an empty list.
 8. Reply:
-   - Line 1: the review's absolute path, and `measured` or `static`.
+   - Line 1: the review's page name, and `measured` or `static`.
    - Line 2: finding count per severity.
    - Each `HIGH` finding, at most 5: `path:line` and its fix.
    - `Next:` apply finding 1, or, when static, add a bench for the top hot path.

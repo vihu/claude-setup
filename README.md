@@ -9,7 +9,6 @@ A Claude Code plugin marketplace that installs my whole setup: skills, hooks, wo
 3. Turn on always-on ADHD mode: `touch ~/.claude/.i-have-adhd-always`
 4. Optional: load the rules as your global `CLAUDE.md` instead of through the `rules` plugin. Run `ln -s ~/.claude/plugins/marketplaces/claude-setup/plugins/rules/rules.md ~/.claude/CLAUDE.md`, then `/plugin disable rules@claude-setup` so the rules do not load twice. No plugin can create this link for you.
 5. Merge `settings.example.json` into `~/.claude/settings.json` by hand. Plugins cannot set any of these settings.
-6. Gitignore the AI docs folder globally: `echo '.ai-docs/' >> ~/.config/git/ignore`
 
 To pick and choose instead, skip step 2 and install single plugins, such as `/plugin install core@claude-setup`.
 
@@ -31,6 +30,8 @@ To update automatically instead, run `/plugin`, open the Marketplaces tab, selec
 | `ponytail`, `i-have-adhd`, `diagram-design`, `impeccable`, `mattpocock-skills`, `archify` | Third-party plugins, listed here so dependencies resolve from one marketplace. Each keeps its own license and upstream repo.                                                                                                 |
 
 Skills from a plugin are namespaced: `/core:pr-review`, not `/pr-review`.
+
+Planning docs (plans, reviews, handoffs) go to the SilverBullet `Hermes` space through the `silverbullet` MCP, never into the repository.
 
 ## Requirements
 
