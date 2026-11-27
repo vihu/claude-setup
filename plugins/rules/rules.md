@@ -1,13 +1,12 @@
 # Division of labour
 
-Response style and code minimalism come from two always-on plugins. Do not restate them here.
+Response style comes from the always-on `i-have-adhd` plugin. Do not restate it here.
 
 - `i-have-adhd`: output shape. Next action first, numbered steps, capped lists, restated state, no tangents, no unnecessary verbosity in output.
-- `ponytail` (level `full`): the ladder, reuse-first, shortest working diff, root-cause bug fixes, one runnable check per non-trivial logic.
 
-This file owns what neither plugin covers: tool routing, artifact conventions, git policy, safety, and personal formatting overrides.
+This file owns everything else: code rules, tool routing, artifact conventions, git policy, safety, and personal formatting overrides.
 
-Precedence: a rule written here wins. Everything not written here follows the plugins.
+Precedence: a rule written here wins. Everything not written here follows the plugin.
 
 # Key words
 
@@ -61,9 +60,37 @@ Types:
 - `REFERENCE`: background material other docs link to.
 - `NOTE`: something worth remembering (a fact, link, decision, or to-do) that fits no other type. Filed under `notes/` when there is no project.
 
-# Code conventions this file adds
+# Code
 
-- **Never** write `ponytail` marker comments: no `shortcut:` or `ponytail:` markers, and no comment that mentions ponytail. This overrides the `ponytail` plugin's instruction to mark simplifications in code.
+Solve the whole problem with the least new code.
+
+Before writing:
+
+- Read the task and the code it touches. List every place the change must reach: callers, tests, fixtures, config, exports.
+- Check what it could break for users: data it would destroy or expose, callers that stop working. That is scope. Extra features are not.
+
+Take the first option that fully works:
+
+1. Leave it out. Skip features, options and flexibility nobody asked for, and name them in one line. A vague request gets the smallest version that does the core job.
+2. Already in this codebase (a helper, component, service, pattern): use it the way the surrounding code does.
+3. Standard library or platform feature: use it, unless the project has its own.
+4. An installed dependency: use it. **Never** add a dependency for a few lines.
+5. Otherwise the minimum code that works. One line when a reader gets it at a glance.
+
+Rules:
+
+- Be minimal about the solution, never about the change: finish every part the task needs, including the callers, tests and fixtures the change breaks.
+- No abstraction, wrapper, type conversion, option, config, boilerplate or "for later" code nobody asked for. Deletion beats addition.
+- Keep the structure the codebase already has: its layers, interfaces and conventions.
+- The shortest working diff wins, once you know everything it must touch. A one-liner that needs decoding is not short.
+- Comment only the why the code cannot show, in one line.
+- Bug fix: grep every caller of the function you touch before editing, then fix the root cause once in the shared code.
+- Code you move or merge keeps its error handling and validation.
+- New non-trivial logic (a branch, a loop, a parser, money or security, a new script or app) leaves one small test or assert-based self-check. Trivial changes need none.
+- **Never** cut: validation at trust boundaries, error handling that prevents data loss, security, accessibility, anything the user asked for.
+
+Conventions:
+
 - Keep files under roughly 500 lines. Split along logical boundaries.
 - Match the existing style of the file you edit. **Never** reformat unrelated code.
 - **Always** run the project formatter and linter before declaring a task done. If none is configured, say so.
@@ -86,6 +113,7 @@ These sit on top of the `i-have-adhd` ruleset.
 - The skim is the `## 80/20` footer from the `eighty-twenty` hook. It goes last. No top skim. Findings, verdicts, evidence, and reasoning come before it as short prose. This overrides `i-have-adhd` on leading with the action and on closing recaps.
 - Each skim line holds one idea in at most 15 words. No semicolons.
 - Finished and no-op items share the ✅ Result line.
+- Skipped or unchecked work, and any risk the user must know, go in the ⚠️ Watch out line.
 - Side notes outside the task get one `Later:` line, or nothing.
 
 # Commits

@@ -26,13 +26,6 @@
       "description": "Shows context usage against the autocompact threshold above the prompt"
     },
     {
-      "name": "ponytail",
-      "source": {
-        "source": "github",
-        "repo": "DietrichGebert/ponytail"
-      }
-    },
-    {
       "name": "i-have-adhd",
       "source": {
         "source": "github",

@@ -35,7 +35,7 @@ async fn connect(url: &str) -> Result<sqlx::SqlitePool> {
         .journal_mode(SqliteJournalMode::Wal)
         .busy_timeout(Duration::from_secs(5))
         .foreign_keys(true);
-    // ponytail: single pool, one process per volume. Move to a read pool + write pool if writes start contending.
+    // Single pool, one process per volume. Move to a read pool + write pool if writes start contending.
     SqlitePoolOptions::new()
         .max_connections(8)
         .connect_with(opts)

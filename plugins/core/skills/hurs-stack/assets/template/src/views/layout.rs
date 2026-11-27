@@ -28,7 +28,7 @@ fn nav() -> Markup {
         div .navbar.bg-base-100.shadow-sm {
             div .flex-1 { a .btn.btn-ghost.text-xl href="/" { "HURS" } }
             div .flex-none {
-                // ponytail: theme toggle is client-only state; persist server-side if accounts appear.
+                // Theme toggle is client-only state; persist server-side if accounts appear.
                 label .swap.swap-rotate x-data="{ dark: false }"
                     "@click"="document.documentElement.dataset.theme = dark ? 'light' : 'dark'; dark = !dark" {
                     input type="checkbox";
