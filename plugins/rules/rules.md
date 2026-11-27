@@ -44,7 +44,8 @@ Routing rule:
 - Page name: `<project>/<TYPE>-<NNN>-<slug>`, where `project` is the repository or folder name in lowercase.
 - `NNN` is monotonic per type within a project, zero-padded to 3 digits.
 - Examples: `livemark/PLAN-008-sync-engine`, `pagebin/TASK-020-batch-export`, `mearum-iced/REVIEW-004-branch-fix-17`.
-- Durable personal notes go to SilverBullet, space `Notes`. Load its `Writing Notes` skill via `help` before creating one.
+- Notes go to `Hermes` as `NOTE` docs. **Never** write to the SilverBullet `Notes` space unless I explicitly ask. Then load its `Writing Notes` skill via `help` first.
+- Set `by: claude` on every SilverBullet page Claude writes, in any space.
 - Use livemark (`livemark:livemark-notes` skill) only when I name it.
 - Excalidraw diagrams: deliver the `.excalidraw` file only. **Never** save a rendered PNG or other image; render screenshots are for review only.
 
@@ -58,6 +59,7 @@ Types:
 - `HANDOFF`: resume prompt for a fresh session after `/clear`. Read once, then stale.
 - `RESEARCH`: a research report, conclusion first, with sources.
 - `REFERENCE`: background material other docs link to.
+- `NOTE`: something worth remembering (a fact, link, decision, or to-do) that fits no other type. Filed under `notes/` when there is no project.
 
 # Code conventions this file adds
 
